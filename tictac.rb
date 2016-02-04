@@ -24,10 +24,14 @@ module TicTacToe
         take_turn(@current_player_id)
 
         if game_won?(@current_player_id)
-          puts "#{@players[@current_player_id][0].name} wins!"
+          show_board
+          puts "#{current_player_name} wins!"
+          play_again
           return
         elsif board_full?
-          puts "The game is a draw. Play again?"
+          show_board
+          puts "The game is a draw."
+          play_again
           return
         end
 
@@ -44,6 +48,7 @@ module TicTacToe
       row_positions = [[1,2,3], [4,5,6], [7,8,9]]
       rows_for_display = row_positions.map(&row_for_display)
       puts rows_for_display.join("\n" + row_separator + "\n")
+      puts ""
     end
 
     def take_turn(player_id)
@@ -53,15 +58,11 @@ module TicTacToe
 
     def choose_spot(player_id)
       loop do
-        print "#{@players[player_id][0].name}, what spot do you want to play your '#{@players[player_id][1]}' on? "
+        print "#{current_player_name}, what spot do you want to play your '#{current_player_marker}' on? "
         selection = gets.to_i
         return selection if free_positions.include?(selection)
         puts "That spot is not available. Try again."
       end
-    end
-
-    def current_player
-      return @players[@current_player_id]
     end
 
     def free_positions
@@ -84,6 +85,30 @@ module TicTacToe
 
     def board_full?
       return free_positions.empty?
+    end
+
+    def play_again
+      loop do
+        print "Would you like to play again? (Y/N) "
+        restart = gets.chomp.downcase
+        if restart == "y"
+          Game.new.run
+        elsif restart == "n"
+          return
+        end
+      end
+    end
+
+    def current_player
+      return @players[@current_player_id]
+    end
+
+    def current_player_name
+      return @players[@current_player_id][0].name
+    end
+
+    def current_player_marker
+      return @players[@current_player_id][1]
     end
 
   end #Game
