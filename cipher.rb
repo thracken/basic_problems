@@ -17,6 +17,5 @@ def caesar_cipher(phrase, shift)
       code += i
     end
   end
-  return puts code
+  return code
 end
-caesar_cipher("Hello my name is JAKE!", 15)

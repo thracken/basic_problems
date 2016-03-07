@@ -80,9 +80,6 @@ module Enumerable
     return array
   end
 
-  def my_map_2
-  end
-
   def my_inject(arg)
     if block_given?
     end
@@ -90,7 +87,7 @@ module Enumerable
 end
 
 x = [1,2,3,4,5,6]
-y = ["123","cat","dog","bear","aardvark"]
+y = ["123","cat","dog","bear","aardvark","to"]
 #x.my_each {|i| puts i}
 #x.my_each_with_index {|item,index| puts "This is item #{index}: #{item}"}
 #puts "#{x.my_select {|i| i.even?}}"
